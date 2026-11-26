@@ -1,8 +1,7 @@
-<h1 align="center">Hi, I'm Kyrylo 👋</h1>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0b3d91,100:1f6feb&height=200&section=header&text=Kyrylo%20Bichkovskyi&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Finance%20%C2%B7%20Quant%20research%20%C2%B7%20AI%20tools%20for%20markets&descAlignY=58&descSize=16"/>
 
 <p align="center">
-  <b>Finance student · Quant research · AI tools for markets</b><br/>
-  BBA Finance @ University of Wrocław · Poland
+  <a href="https://github.com/AkirraBskyi"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1200&color=58A6FF&center=true&vCenter=true&width=560&lines=BBA+Finance+student+%40+University+of+Wroc%C5%82aw;Valuation+%C2%B7+DCF+%C2%B7+three-statement+models;Quant+research%3A+backtests%2C+VaR%2C+Black-Litterman;Building+Claude+skills+for+traders" alt="Typing intro"/></a>
 </p>
 
 <p align="center">
@@ -67,3 +66,16 @@ Forage job simulations: **Goldman Sachs** Risk · **J.P. Morgan** Investment Ban
 </p>
 
 **Languages:** English (fluent) · Ukrainian (native) · Russian (fluent) · Polish, German (elementary)
+
+---
+
+### Commit activity
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/output/github-snake-dark.svg"/>
+    <img alt="Contribution snake" src="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/output/github-snake.svg"/>
+  </picture>
+</p>
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1f6feb,50:0b3d91,100:0d1117&height=110&section=footer"/>
