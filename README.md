@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/design/assets/header-dark.svg"/>
-  <img width="100%" alt="Kyrylo Bichkovskyi — Finance · Quant research · AI tools for markets" src="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/design/assets/header-light.svg"/>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/main/assets/header-dark.svg"/>
+  <img width="100%" alt="Kyrylo Bichkovskyi — Finance · Quant research · AI tools for markets" src="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/main/assets/header-light.svg"/>
 </picture>
 
 <p align="center">
@@ -17,8 +17,6 @@
 | 🤖 | [**Macro-AI-Agent-for-Claude**](https://github.com/AkirraBskyi/Macro-AI-Agent-for-Claude) | Macro FX pipeline for Claude: data, features, signals |
 | 🤖 | [**xauusd-report-generator**](https://github.com/AkirraBskyi/xauusd-report-generator) | Gold (XAU/USD) strategy report generator with PDF export |
 | 🔜 | **claude-finance-skills** · **KirillGlass** | Claude skills for traders · macOS-style desktop for Windows |
-
-<sub>**Certified:** Goldman Sachs Risk · J.P. Morgan Investment Banking ([Forage](https://github.com/AkirraBskyi/forage-job-simulations)) &nbsp;·&nbsp; **Languages:** EN · UA · RU · PL/DE (elementary)</sub>
 
 <p>
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>

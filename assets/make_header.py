@@ -1,100 +1,81 @@
-"""Generates the animated profile header panel (dark + light).
+"""Generates the animated profile banner (dark + light).
 
 Run:  python assets/make_header.py
 Output: assets/header-dark.svg, assets/header-light.svg
+The banner keeps its own colours; only the waves at the bottom take the page
+background, so each theme gets its own file.
 """
 from pathlib import Path
 
-THEMES = {
-    "dark": dict(bg="#0d1117", border="#30363d", text="#e6edf3", muted="#8d96a0",
-                 chip="#161b22", track="#21262d", blue="#58a6ff", green="#3fb950",
-                 purple="#a371f7"),
-    "light": dict(bg="#ffffff", border="#d0d7de", text="#1f2328", muted="#59636e",
-                  chip="#f6f8fa", track="#eaeef2", blue="#0969da", green="#1a7f37",
-                  purple="#8250df"),
-}
+NAME = "Kyrylo Bichkovskyi"
+TAGLINE = "finance · quant research · AI tools for markets"
+SUBLINE = "BBA Finance @ University of Wrocław · Wrocław · PL"
 
-CHIPS = [
-    ("Valuation &amp; modelling", "DCF · 3-statement · WACC", "blue"),
-    ("Quant research", "backtests · VaR · Black-Litterman", "green"),
-    ("AI for markets", "Claude skills &amp; agents", "purple"),
-]
+# gradient: deep -> accent (green) -> second accent (blue)
+THEMES = {
+    "dark": dict(page="#0d1117", deep="#0a1a33"),
+    "light": dict(page="#ffffff", deep="#0b2a5b"),
+}
+ACCENT, ACCENT2 = "#1a7f37", "#0969da"
 
 SANS = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif"
 MONO = "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace"
+H = 196
+
+
+def wave(y: int, amp: int, fill: str, opacity: float, dur: int, reverse: bool) -> str:
+    """Sine-like wave, 2 periods wider than the banner, sliding by one period (430px)."""
+    d = f"M0 {y} q107.5 {-amp} 215 0" + " t215 0" * 7 + f" V{H} H0 Z"
+    cls = "wv rv" if reverse else "wv"
+    return f'<path class="{cls}" style="animation-duration:{dur}s" d="{d}" fill="{fill}" opacity="{opacity}"/>'
 
 
 def svg(t: dict) -> str:
-    chips = []
-    for i, (title, sub, color) in enumerate(CHIPS):
-        x = 28 + i * 274
-        delay = 2.05 + i * 0.15
-        chips.append(f"""
-  <g class="f" style="animation-delay:{delay:.2f}s">
-    <rect x="{x}" y="172" width="256" height="46" rx="10" fill="{t['chip']}" stroke="{t['border']}"/>
-    <rect x="{x}" y="184" width="3" height="22" rx="1.5" fill="{t[color]}"/>
-    <text x="{x + 16}" y="191" class="sans" font-size="13" font-weight="600" fill="{t['text']}">{title}</text>
-    <text x="{x + 16}" y="208" class="mono" font-size="11" fill="{t['muted']}">{sub}</text>
-  </g>""")
-
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="860" height="234" viewBox="0 0 860 234" role="img" aria-label="Kyrylo Bichkovskyi — Finance · Quant research · AI tools for markets">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="860" height="{H}" viewBox="0 0 860 {H}" role="img" aria-label="{NAME} — {TAGLINE}">
   <defs>
-    <linearGradient id="bar" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0" stop-color="{t['blue']}"/>
-      <stop offset="1" stop-color="{t['purple']}"/>
+    <linearGradient id="bn" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="{t['deep']}"/>
+      <stop offset=".6" stop-color="{ACCENT}"/>
+      <stop offset="1" stop-color="{ACCENT2}"/>
     </linearGradient>
+    <radialGradient id="gl">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cb"><rect x="1" y="1" width="858" height="{H - 2}" rx="14"/></clipPath>
   </defs>
   <style>
-    .sans {{ font-family: {SANS}; }}
-    .mono {{ font-family: {MONO}; }}
-    .f {{ opacity: 0; animation: rise .6s cubic-bezier(.2,.7,.2,1) forwards; }}
-    .grow {{ transform-box: fill-box; transform-origin: left center; transform: scaleX(0);
-             animation: grow 1.4s cubic-bezier(.65,0,.35,1) .6s forwards; }}
-    .out {{ animation: fadeout .3s ease 2s forwards; }}
-    .pulse {{ animation: pulse 2.4s ease-in-out 2.6s infinite; }}
-    @keyframes rise {{ from {{ opacity: 0; transform: translateY(8px); }} to {{ opacity: 1; transform: none; }} }}
-    @keyframes grow {{ to {{ transform: scaleX(1); }} }}
-    @keyframes fadeout {{ to {{ opacity: 0; }} }}
-    @keyframes pulse {{ 0%,100% {{ opacity: 1; }} 50% {{ opacity: .35; }} }}
+    .s {{ font-family: {SANS}; }}
+    .m {{ font-family: {MONO}; }}
+    .soft {{ opacity: 0; animation: soft 1.1s cubic-bezier(.2,.7,.2,1) forwards; }}
+    .wv {{ animation-name: wv; animation-timing-function: linear; animation-iteration-count: infinite; }}
+    .rv {{ animation-direction: reverse; }}
+    .glow {{ animation: glow 9s ease-in-out infinite alternate; }}
+    @keyframes soft {{ from {{ opacity: 0; transform: translateY(4px); }} to {{ opacity: 1; transform: none; }} }}
+    @keyframes wv {{ from {{ transform: translateX(0); }} to {{ transform: translateX(-430px); }} }}
+    @keyframes glow {{ from {{ transform: translateX(-240px); }} to {{ transform: translateX(240px); }} }}
     @media (prefers-reduced-motion: reduce) {{
-      .f, .grow, .out, .pulse {{ animation: none; opacity: 1; transform: none; }}
-      .out {{ opacity: 0; }}
+      .soft {{ animation: none; opacity: 1; transform: none; }}
+      .wv, .glow {{ animation: none; }}
     }}
   </style>
 
-  <rect x="1" y="1" width="858" height="232" rx="14" fill="{t['bg']}" stroke="{t['border']}"/>
-
-  <g class="f">
-    <circle cx="24" cy="22" r="5.5" fill="#ff5f57"/>
-    <circle cx="42" cy="22" r="5.5" fill="#febc2e"/>
-    <circle cx="60" cy="22" r="5.5" fill="#28c840"/>
-    <text x="82" y="26" class="mono" font-size="12" fill="{t['muted']}">~/AkirraBskyi</text>
-    <circle class="pulse" cx="752" cy="22" r="4" fill="{t['green']}"/>
-    <text x="764" y="26" class="mono" font-size="12" fill="{t['muted']}">Wrocław · PL</text>
-    <line x1="1" y1="41" x2="859" y2="41" stroke="{t['border']}"/>
+  <g clip-path="url(#cb)">
+    <rect width="860" height="{H}" fill="url(#bn)"/>
+    <circle class="glow" cx="430" cy="40" r="280" fill="url(#gl)"/>
+    {wave(H - 44, 9, t['page'], .35, 16, True)}
+    {wave(H - 32, 11, t['page'], 1, 11, False)}
   </g>
 
-  <g class="f" style="animation-delay:.15s">
-    <text x="28" y="88" class="sans" font-size="32" font-weight="700" fill="{t['text']}">Kyrylo Bichkovskyi</text>
+  <g class="soft" style="animation-delay:.1s">
+    <text x="430" y="76" text-anchor="middle" class="s" font-size="40" font-weight="700" fill="#fff">{NAME}</text>
   </g>
-  <g class="f" style="animation-delay:.3s">
-    <text x="28" y="115" class="mono" font-size="14" fill="{t['blue']}">finance · quant research · AI tools for markets</text>
+  <g class="soft" style="animation-delay:.3s">
+    <text x="430" y="104" text-anchor="middle" class="m" font-size="15" fill="#fff" fill-opacity=".92">{TAGLINE}</text>
   </g>
-  <g class="f" style="animation-delay:.45s">
-    <text x="28" y="138" class="sans" font-size="13" fill="{t['muted']}">BBA Finance @ University of Wrocław</text>
+  <g class="soft" style="animation-delay:.45s">
+    <text x="430" y="126" text-anchor="middle" class="s" font-size="13" fill="#fff" fill-opacity=".75">{SUBLINE}</text>
   </g>
-
-  <g class="f" style="animation-delay:.55s">
-    <rect x="28" y="154" width="804" height="4" rx="2" fill="{t['track']}"/>
-  </g>
-  <rect class="grow" x="28" y="154" width="804" height="4" rx="2" fill="url(#bar)"/>
-  <g class="f" style="animation-delay:.6s"><g class="out">
-    <text x="832" y="138" text-anchor="end" class="mono" font-size="11" fill="{t['muted']}">loading profile…</text>
-  </g></g>
-  <g class="f" style="animation-delay:2.05s">
-    <text x="832" y="138" text-anchor="end" class="mono" font-size="11" fill="{t['green']}">ready ✓</text>
-  </g>
-{''.join(chips)}
 </svg>
 """
 
