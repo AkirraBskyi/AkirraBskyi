@@ -15,7 +15,6 @@
 | 📈 | [**wsr-strategy-validation**](https://github.com/AkirraBskyi/wsr-strategy-validation) | Swing system on 39 instruments with a multiple-testing check |
 | 📊 | [**asml-dcf-valuation**](https://github.com/AkirraBskyi/asml-dcf-valuation) | ASML three-statement model and DCF in Excel, 4-page report |
 | 🤖 | [**Macro-AI-Agent-for-Claude**](https://github.com/AkirraBskyi/Macro-AI-Agent-for-Claude) | Macro FX pipeline for Claude: data, features, signals |
-| 🤖 | [**xauusd-report-generator**](https://github.com/AkirraBskyi/xauusd-report-generator) | Gold (XAU/USD) strategy report generator with PDF export |
 | 🔜 | **claude-finance-skills** · **KirillGlass** | Claude skills for traders · macOS-style desktop for Windows |
 
 <p>
