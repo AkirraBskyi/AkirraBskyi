@@ -29,3 +29,8 @@
   <img src="https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=anthropic&logoColor=white"/>
   <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white"/>
 </p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/main/assets/contrib-dark.svg"/>
+  <img width="100%" alt="Contributions in the last year" src="https://raw.githubusercontent.com/AkirraBskyi/AkirraBskyi/main/assets/contrib-light.svg"/>
+</picture>
